@@ -1,0 +1,57 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"
+   	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+   	
+   	<!-- ######### JTA persistence unit ########## -->
+   	<persistence-unit name="jtaUnit" transaction-type="JTA" >
+		<description>jta-persistence-unit</description>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+      		<class>ca.liu.domain.User</class>
+      		<class>ca.liu.domain.Log</class>
+   		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+	</persistence-unit>
+   	
+   	<!-- ######### Local persistence unit ########## -->
+   	<persistence-unit name="localUnit" transaction-type="RESOURCE_LOCAL">
+   		<description>local-persistence-unit</description>
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<!--
+		Three ways to set mapping class:
+		1)by default, JPA will look for orm.xml file in META-INF folder
+		
+		2)specify mapping-file here
+		<mapping-file>hibernate.cfg.xml</mapping-file>
+       	
+       	3)manually add mapped class
+       	<class>ca.liu.spring.entity.User</class>
+       	<class>ca.liu.spring.entity.Log</class>
+       	-->
+
+      	<properties>
+      		<!-- local data source properties-->
+      		<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+        	<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/springtest"/>
+        	<property name="hibernate.connection.username" value="springtest_ddl"/>
+        	<property name="hibernate.connection.password" value="spring"/>
+         	
+         	<!-- session factory properties -->
+         	<!--
+         	<property name="hibernate.c3p0.min_size" value="5"/>
+         	<property name="hibernate.c3p0.max_size" value="20"/>
+         	<property name="hibernate.c3p0.timeout" value="1800"/>
+         	<property name="hibernate.c3p0.max_statements" value="50"/>
+          	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+          	<property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+            -->
+            <!-- transaction manager properties -->
+            <!--
+          	<property name="hibernate.session_factory_name" value="hibernateSessionFactory" />
+         	<property name="hibernate.transaction.manager_lookup_class"
+                      value="org.hibernate.transaction.JBossTransactionManagerLookup" />
+            -->
+        </properties>
+	</persistence-unit>
+</persistence>

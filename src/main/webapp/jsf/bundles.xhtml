@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+	<h:body>
+   		<h2>JSF 2.0 and Resource Bundles Examples - bundles.xhtml</h2>
+      	<ol>
+ 			<li><h:outputText value="#{msg.message}" /></li>
+    		<li><h:outputText value="#{msg['message.test1']}" /></li>
+    		<li><h:outputText value="#{msg['message.test2']}" /></li>
+    		<li><h:outputText value="#{msg['message.test2']}" escape="false" /></li>
+    		<li><h:outputText value="#{msg['message.test3']}" /></li>
+    		<li><h:outputText value="#{msg['message.test3']}" escape="false" /></li>
+    		<li>
+ 	     		<h:outputFormat value="#{msg['message.param1']}">
+					<f:param value="param0" />
+	     		</h:outputFormat>
+			</li>
+	 		<li>
+	     		<h:outputFormat value="#{msg['message.param2']}">
+	    			<f:param value="param0" />
+	    			<f:param value="param1" />
+	     		</h:outputFormat>
+	  		</li>
+    	</ol>
+    	
+    	<h:form>
+	    	<h:panelGrid columns="2">
+			Language change with LanguageChangeListener class: 
+			<h:selectOneMenu value="#{i18nBean.localeCode}" onchange="submit()">
+				<f:valueChangeListener type="ca.liu.jsf.listener.LanguageChangeListener"/>
+	   			<f:selectItems value="#{i18nBean.countriesKeySet}" /> 
+	   		</h:selectOneMenu>
+	 		</h:panelGrid>
+	 		
+	 		<h:panelGrid columns="2">
+			Language change with method binding: 
+			<h:selectOneMenu value="#{i18nBean.localeCode}" onchange="submit()"
+				valueChangeListener="#{i18nBean.countryLocaleCodeChanged}">
+	   			<f:selectItems value="#{i18nBean.countriesKeySet}" /> 
+	   		</h:selectOneMenu>
+	 		</h:panelGrid>
+ 		</h:form>
+    </h:body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="userDAO2" class="ca.liu.spring.dao.UserDAOImplTwo">
+	</bean>
+
+	<!-- prototype will return a seperate instance -->
+	<bean id="userSrv" class="ca.liu.spring.service.UserService" 
+	autowire="byName" lazy-init="false" init-method="init" destroy-method="destory">
+		<property name="userDAO" ref="userDAO2" />
+		<property name="name" value="XML Assgined Value" />
+		<property name="props">
+			<props>
+				<prop key="name">Liu Yang</prop>
+				<prop key="email">Liu.Yang@cbc.ca</prop>
+			</props>
+		</property>
+		<property name="list">
+			<list>
+				<value>1</value>
+				<value>2</value>
+			</list>
+		</property>
+		<property name="map">
+			<map>
+				<entry key="name" value="Liu Yang"/>
+				<entry key="age" value="28"/>
+			</map>
+		</property>
+		<property name="set">
+			<set>
+				<value>Leo</value>
+				<value>John</value>
+			</set>
+		</property>
+	</bean>
+</beans>
